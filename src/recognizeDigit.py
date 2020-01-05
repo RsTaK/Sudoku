@@ -7,7 +7,7 @@ class recognizeDigit:
     self.predict(cell)
   
   def predict(self, cell):
-    model = load_model('./model/mnist_digit_recognizer.h5')
+    model = load_model('./model/Model.h5')
     rescaled_cell = self.rescale(cell)
     pred = model.predict(rescaled_cell)
     print(pred.argmax())

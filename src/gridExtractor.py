@@ -32,12 +32,12 @@ class gridExtractor:
       if len(approx) == 4:
         target = approx.reshape(4,2)
         break
-    print()
+    
     masked_Image = cv2.drawContours(self.image.copy(),[target],0,(0,255,0), -1)
     helper.showImage('Masked Image', masked_Image)
     cropped_Image = helper.four_point_transform(self.image, target)
     cropped_Image = helper.convertSquare(cropped_Image)
     helper.showImage('Cropped Image', cropped_Image)
-    cv2.imwrite('./input/cropped_Image.jpg', cropped_Image)
+    cv2.imwrite('./input/cropped_Image1.jpg', cropped_Image)
     print('Grid Extracted...')
     

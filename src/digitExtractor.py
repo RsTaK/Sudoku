@@ -31,4 +31,4 @@ class digitExtractor:
         
     print(count)
 
-digitExtractor('./input/cropped_Image.jpg')
+digitExtractor('./input/cropped_Image1.jpg')

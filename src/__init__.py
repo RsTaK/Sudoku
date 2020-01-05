@@ -1,3 +1,3 @@
 from gridExtractor import gridExtractor
-gridExtractor('./input/sudoku.jpg')
+gridExtractor('./input/abcd.png')
 print('__init__ called')

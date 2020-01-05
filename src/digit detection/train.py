@@ -1,8 +1,13 @@
 import tensorflow as tf
+import cv2
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, Dropout, Flatten, MaxPooling2D
+from keras.utils import to_categorical
 
 (x_train, y_train), (x_test, y_test)  = tf.keras.datasets.mnist.load_data()
+
+x_train = cv2.bitwise_not(x_train)
+x_test = cv2.bitwise_not(x_test)
 
 x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], 1)
 x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1)
@@ -12,6 +17,9 @@ x_test = x_test.astype('float32')
 
 x_train /= 255
 x_test /= 255
+
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
 
 model = Sequential()
 model.add(Conv2D(filters = 28, kernel_size = (3,3), padding = 'Same',
