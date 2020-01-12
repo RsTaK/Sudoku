@@ -11,7 +11,6 @@ def approx(c):
   return cv2.approxPolyDP(c, 0.02*p, True)
 
 def convertSquare(image, default_size = 306):
-	#cv2.resize(image,(int((image.shape[0]+image.shape[1])/2), int((image.shape[0]+image.shape[1])/2)))
 	return cv2.resize(image, (default_size, default_size))
 
 def loadImage(path):

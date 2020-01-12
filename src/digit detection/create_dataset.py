@@ -7,7 +7,7 @@ import pickle
 
 if __name__ == "__main__":
 
-  Data_dir = r'src\digit detection\data'
+  Data_dir = r'src\digit detection\digits3'
   Categories = os.listdir(Data_dir)
   IMG_SIZE = 28
 
@@ -34,8 +34,14 @@ for features, labels in Training_Data:
   X.append(features)
   Y.append(labels)
 
+a,b,c=np.array(X).shape 
+
 print('Features and Labels generated...')
 X = np.array(X).reshape((-1, IMG_SIZE, IMG_SIZE, 1))
+print(X.shape)
+#Y = np.array(Y).reshape((-1,1))
+#print(Y.shape)
+
 
 pickle_out = open(r'src\digit detection\pickle files\X.pickle', 'wb')
 pickle.dump(X, pickle_out)

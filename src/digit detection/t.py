@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
   print('Training Finished...')
 
-  print(model.evaluate(X, Y))
+  print(model.evaluate(X, Y, verbose=1))
 
   model.save('./model/Model.h5')
   print('Model Saved in the directory...')

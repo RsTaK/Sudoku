@@ -19,7 +19,8 @@ class gridExtractor:
     print('Preprocessing has been started...')
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blur = cv2.bilateralFilter(gray, 11, 17, 17)
-    thresh  = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,7,4)
+    thresh  = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,45,1)
+
     print('Preprocessing done sucessfully...')
     return thresh
 
@@ -33,11 +34,15 @@ class gridExtractor:
         target = approx.reshape(4,2)
         break
     
-    masked_Image = cv2.drawContours(self.image.copy(),[target],0,(0,255,0), -1)
+    masked_Image = cv2.drawContours(self.image.copy(),[target],0,(0,255,0), 1)
     helper.showImage('Masked Image', masked_Image)
     cropped_Image = helper.four_point_transform(self.image, target)
     cropped_Image = helper.convertSquare(cropped_Image)
+
+
     helper.showImage('Cropped Image', cropped_Image)
-    cv2.imwrite('./input/cropped_Image1.jpg', cropped_Image)
+    cv2.imwrite('./input/cropped_Image.jpg', cropped_Image)
     print('Grid Extracted...')
-    
+
+if __name__ == "__main__":
+  gridExtractor(r'input\sud.jpg')
