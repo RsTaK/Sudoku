@@ -4,34 +4,32 @@ import pickle
 import keras.backend as K
 import numpy as np
 
-class recognizeDigit:
+'''def predict(self, cell):
+  model = load_model('./model/Model.h5')
+  f = K.function([model.layers[0].input, K.learning_phase()],[model.layers[-1].output])
+  rescaled_cell = self.rescale(cell)
 
-  def __init__(self, cell):
-    self.predict(cell)
-  
-  def predict(self, cell):
-    model = load_model('./model/Model.h5')
-    f = K.function([model.layers[0].input, K.learning_phase()],[model.layers[-1].output])
-    rescaled_cell = self.rescale(cell)
+  result = []
 
-    result = []
+  for _ in range(10):
+      result.append(f([rescaled_cell, 1]))
 
-    for _ in range(10):
-        result.append(f([rescaled_cell, 1]))
+  result = np.array(result)
 
-    result = np.array(result)
+  prediction = result.mean(axis=0)
+  uncertainty = result.var(axis=0)
+  if uncertainty.argmax() > 3:
+    new_prediction = 0
+    print(prediction.argmax(),uncertainty.argmax(),new_prediction)
+  else:
+    print(prediction.argmax(),uncertainty.argmax())'''  
 
-    prediction = result.mean(axis=0)
-    uncertainty = result.var(axis=0)
-    if uncertainty.argmax() > 3:
-      new_prediction = 0
-      print(prediction.argmax(),uncertainty.argmax(),new_prediction)
-    else:
-      print(prediction.argmax(),uncertainty.argmax())
+def recognizeDigit(cell):
+  model = load_model('./model/Model.h5')
+  rescaled_cell = rescale(cell)
+  pred = model.predict(rescaled_cell)
+  return pred.argmax()
 
-    #pred = model.predict(rescaled_cell)
-    #print(pred.argmax())
-  
-  def rescale(self, cell):
-    resized_cell = cv2.resize(cell, (28, 28))
-    return resized_cell.reshape(1, resized_cell.shape[0], resized_cell.shape[1], 1)
+def rescale(cell):
+  resized_cell = cv2.resize(cell, (28, 28))
+  return resized_cell.reshape(1, resized_cell.shape[0], resized_cell.shape[1], 1)

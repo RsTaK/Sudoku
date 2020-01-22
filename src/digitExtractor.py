@@ -15,7 +15,7 @@ class digitExtractor:
     thresh  = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,7)
     #gridless_img = self.removeGrid(thresh)
     helper.showImage('Cropped Image',thresh)
-    #self.eachGrid(thresh)
+    self.eachGrid(thresh)
     helper.destroyWindows()
 
   """
@@ -36,16 +36,28 @@ class digitExtractor:
     width, height = image.shape
     cell_size = int(width / 9)
     count = 0
+    each_row = list() 
+    sudoku  = list()
     for w in range(0, width, cell_size):
       for h in range(0, height, cell_size):
         current_cell = image[w +5 : w + cell_size - 5, h + 5 : h + cell_size - 5]
         contours, _ = cv2.findContours(current_cell, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
         if contours:
-          count+=1
-          helper.showImage(helper.randomString(2),current_cell)
-          #cv2.imwrite('src\digit detection\data2' + '\\' + helper.randomString(2) + '.jpg', current_cell)
-          recognizeDigit(current_cell)
-        """else:
-          print('0')"""
+          conts = sorted(contours, key=cv2.contourArea, reverse=True)
+          cnt = conts[0]
+          if cv2.contourArea(cnt)>cell_size*cell_size*0.03:
+            count+=1
+            helper.showImage(helper.randomString(2),current_cell)
+            #cv2.imwrite('src\digit detection\data2' + '\\' + helper.randomString(2) + '.jpg', current_cell)
+            pred_digit = recognizeDigit(current_cell)
+          else:
+            pred_digit = 0
+        else:
+          pred_digit = 0
+        each_row.append(pred_digit)
+        if len(each_row) == 9:
+          sudoku.append(each_row)
+          each_row = list() 
     print(count)
+    print(sudoku)
 digitExtractor('./input/cropped_Image.jpg')

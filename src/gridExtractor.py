@@ -45,4 +45,4 @@ class gridExtractor:
     print('Grid Extracted...')
 
 if __name__ == "__main__":
-  gridExtractor(r'input\sud.jpg')
+  gridExtractor(r'input\aa.jpg')
