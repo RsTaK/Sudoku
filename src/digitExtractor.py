@@ -8,15 +8,14 @@ class digitExtractor:
 
   def __init__(self, path):
 
-
-    self.image = helper.loadImage(path)
+    self.image = path
+    #self.image = helper.loadImage(path)
     gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
     blur = cv2.bilateralFilter(gray, 5, 250, 250)
     thresh  = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,7)
     #gridless_img = self.removeGrid(thresh)
     helper.showImage('Cropped Image',thresh)
-    self.eachGrid(thresh)
-    helper.destroyWindows()
+    self._output = self.eachGrid(thresh)
 
   """
   def removeGrid(self, image):  
@@ -46,18 +45,22 @@ class digitExtractor:
           conts = sorted(contours, key=cv2.contourArea, reverse=True)
           cnt = conts[0]
           if cv2.contourArea(cnt)>cell_size*cell_size*0.03:
-            count+=1
-            helper.showImage(helper.randomString(2),current_cell)
+            #helper.showImage(helper.randomString(2),current_cell)
             #cv2.imwrite('src\digit detection\data2' + '\\' + helper.randomString(2) + '.jpg', current_cell)
-            pred_digit = recognizeDigit(current_cell)
+            pred_digit = recognizeDigit(current_cell).prediction
           else:
             pred_digit = 0
         else:
           pred_digit = 0
+        count+=1
+        print('{} Numbers has been Recognized'.format(count))
         each_row.append(pred_digit)
         if len(each_row) == 9:
           sudoku.append(each_row)
           each_row = list() 
-    print(count)
-    print(sudoku)
-digitExtractor('./input/cropped_Image.jpg')
+    return sudoku
+  
+  @property
+  def output(self):
+    return self._output
+#digitExtractor('./input/cropped_Image.jpg')

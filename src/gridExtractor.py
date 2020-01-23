@@ -12,8 +12,8 @@ class gridExtractor:
   def __init__(self, path):
     self.image = helper.loadImage(path)
     processed_image = self.preprocess(self.image)
-    self.croppedImage(processed_image)
-    helper.destroyWindows()
+    self._output = self.croppedImage(processed_image)
+    
 
   def preprocess(self, image):
     print('Preprocessing has been started...')
@@ -36,13 +36,17 @@ class gridExtractor:
     
     masked_Image = cv2.drawContours(self.image.copy(),[target],0,(0,255,0), 1)
     helper.showImage('Masked Image', masked_Image)
-    cropped_Image = helper.four_point_transform(self.image, target)
+    cropped_Image = helper.four_point_transform(self.image, target)  
     cropped_Image = helper.convertSquare(cropped_Image)
-
-
-    helper.showImage('Cropped Image', cropped_Image)
-    cv2.imwrite('./input/cropped_Image.jpg', cropped_Image)
     print('Grid Extracted...')
+    #helper.showImage('Cropped Image', cropped_Image)
+    cv2.imwrite('./input/cropped_Image.jpg', cropped_Image)
+    return cropped_Image
+  
+  @property
+  def output(self):
+    return self._output
 
+'''
 if __name__ == "__main__":
-  gridExtractor(r'input\aa.jpg')
+  gridExtractor(r'input\aa.jpg')'''

@@ -23,13 +23,21 @@ import numpy as np
     print(prediction.argmax(),uncertainty.argmax(),new_prediction)
   else:
     print(prediction.argmax(),uncertainty.argmax())'''  
+class recognizeDigit:
 
-def recognizeDigit(cell):
-  model = load_model('./model/Model.h5')
-  rescaled_cell = rescale(cell)
-  pred = model.predict(rescaled_cell)
-  return pred.argmax()
+  def __init__(self, cell):
+    self._prediction = self.predict(cell)
 
-def rescale(cell):
-  resized_cell = cv2.resize(cell, (28, 28))
-  return resized_cell.reshape(1, resized_cell.shape[0], resized_cell.shape[1], 1)
+  def predict(self, cell):
+    model = load_model('./model/Model.h5')
+    rescaled_cell = self.rescale(cell)
+    pred = model.predict(rescaled_cell)
+    return pred.argmax()
+
+  def rescale(self, cell):
+    resized_cell = cv2.resize(cell, (28, 28))
+    return resized_cell.reshape(1, resized_cell.shape[0], resized_cell.shape[1], 1)
+
+  @property
+  def prediction(self):
+    return self._prediction
