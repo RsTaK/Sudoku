@@ -7,9 +7,8 @@ from digitExtractor import digitExtractor
 
 if __name__ == "__main__":
 
-  cropped_Image = gridExtractor(r'input\new.jpg').output
+  cropped_Image = gridExtractor(r'input\sudoku.jpg').output
   recognized_sudoku = digitExtractor(cropped_Image).output
   solved_sudoku = Sudoku_Solver(recognized_sudoku).output
-  print(solved_sudoku)
   AR(cropped_Image, solved_sudoku)
   helper.destroyWindows()

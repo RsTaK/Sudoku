@@ -13,7 +13,7 @@ class gridExtractor:
     self.image = helper.loadImage(path)
     processed_image = self.preprocess(self.image)
     self._output = self.croppedImage(processed_image)
-    
+
 
   def preprocess(self, image):
     print('Preprocessing has been started...')
@@ -45,7 +45,11 @@ class gridExtractor:
   
   @property
   def output(self):
-    return self._output
+    try:
+      return self._output
+    except:
+      pass
+
 
 '''
 if __name__ == "__main__":
