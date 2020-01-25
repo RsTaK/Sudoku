@@ -3,6 +3,7 @@ import cv2
 import pickle
 import keras.backend as K
 import numpy as np
+from model_path import MODEL_PATH
 
 '''def predict(self, cell):
   model = load_model('./model/Model.h5')
@@ -29,7 +30,7 @@ class recognizeDigit:
     self._prediction = self.predict(cell)
 
   def predict(self, cell):
-    model = load_model('./model/Model.h5')
+    model = load_model(MODEL_PATH)
     rescaled_cell = self.rescale(cell)
     pred = model.predict(rescaled_cell)
     return pred.argmax()

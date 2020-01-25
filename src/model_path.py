@@ -1,0 +1,1 @@
+MODEL_PATH = r'C:\Users\Rahul Gulia\Documents\Sudoku\model\Model.h5'
