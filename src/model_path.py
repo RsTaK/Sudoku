@@ -1,1 +1,1 @@
-MODEL_PATH = r'C:\Users\Rahul Gulia\Documents\Sudoku\model\Model.h5'
+MODEL_PATH = r'C:\Users\harsh\OneDrive\Documents\GitHub\Sudoku\model\Model.h5'
