@@ -3,7 +3,7 @@ import cv2
 import pickle
 import keras.backend as K
 import numpy as np
-from model_path import MODEL_PATH
+from src.model_path import MODEL_PATH
 
 '''def predict(self, cell):
   model = load_model('./model/Model.h5')

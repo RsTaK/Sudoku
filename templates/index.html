@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Machine Solving Sudoku</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/mainpage.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body> 
+        <div class="wrapper">
+            <div class="nav">
+                <ul>
+                    <li><a href="#">HomePage</a></li>
+                </ul>
+            </div>
+            <div class="header">
+                <h1>AI Powered Sudoku Solver</h1>
+            </div>
+            <div class="tagline">
+                <p>Harness the power of AI</p>
+                <p> to solve your daily Sudoku Problem</p>
+            </div>
+            <div class="file-upload">
+                <input class="file-upload-input" type="file" name="file" id="file">
+                <button class="file-upload-button" type="button">Upload Photo</button>
+                <span class="file-upload-label">No file selected</span>
+                <img src="" alt="Image Preview" class="image-preview">
+            </div>
+            <div class="info-desk">
+                <p><a href="#">For more info, Visit Documentation Page</a></p>
+            </div>
+            <div class="loader"></div>
+            <div class="submitbutton">
+            <button class="submit-button" type="button" onclick="myFunction()">Submit</button>
+            </div>
+            <div class="respose">
+                <img src="" alt="Cropped Image" class="croppedImage"></img>
+                <img src="" alt="Solved Image" class="solvedImage"></img>
+            </div>
+            <div class="footer">
+                <p>Optimized for Desktop</p>
+            </div>
+        </div>
+        <script>
+            Array.prototype.forEach.call(document.querySelectorAll('.file-upload-button'),function(button)
+            {
+                const hiddenInput=button.parentElement.querySelector('.file-upload-input');
+                const label=button.parentElement.querySelector('.file-upload-label');
+                const sum=document.querySelector('.submitbutton');
+                const previewImage=document.querySelector('.image-preview');
+                button.addEventListener('click',function()
+                {
+                    hiddenInput.click();
+                }
+                );
+                hiddenInput.addEventListener('change',function()
+                {
+                    const filename=Array.prototype.map.call(hiddenInput.files,function(file){
+                    label.style.display="block";
+                    sum.style.display="block";
+                    previewImage.style.display="block";
+                    const reader=new FileReader()
+                    reader.addEventListener("load",function()
+                        {
+                            previewImage.setAttribute("src",this.result);
+                        }
+                        );
+                    reader.readAsDataURL(file);
+                    return file.name;
+                    }
+                    );
+                label.textContent=filename;
+                }
+                );
+            });
+            function myFunction() {
+                const previewImage=document.querySelector('.image-preview');
+                const loader=document.querySelector('.loader');
+                const upload=document.querySelector('.file-upload-button');
+                const sum=document.querySelector('.submitbutton');
+                const label=document.querySelector('.file-upload-label');
+                label.textContent="Please Wait While AI is Setting Up...";
+                upload.style.display="none";
+                sum.style.display="none";
+                previewImage.style.display="none";
+                loader.style.display="block";
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json;charset=utf-8",
+                        url: "/predict",
+                        traditional: "true",
+                        data: JSON.stringify({"filepath":previewImage.getAttribute("src")}),
+                        dataType: "json",
+                        success:function(response_data_json) {
+                            const croppedImage=document.querySelector('.croppedImage');
+                            const solvedImage=document.querySelector('.solvedImage');
+                            croppedImage.setAttribute("src",response_data_json.croppedImage);
+                            solvedImage.setAttribute("src",response_data_json.solvedImage);
+                            },
+                    });
+            }
+        </script>
+    </body>
+</html>

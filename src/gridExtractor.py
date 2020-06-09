@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import helper
+from src import helper
 
 
 '''
@@ -40,7 +40,8 @@ class gridExtractor:
     cropped_Image = helper.convertSquare(cropped_Image)
     print('Grid Extracted...')
     #helper.showImage('Cropped Image', cropped_Image)
-    cv2.imwrite('./input/cropped_Image.jpg', cropped_Image)
+    
+    cv2.imwrite('./static/upload/cropped_Image.jpg', masked_Image)
     return cropped_Image
   
   @property

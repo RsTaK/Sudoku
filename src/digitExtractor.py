@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
-import helper
+from src import helper
 
-from recognizeDigit import recognizeDigit
+from src.recognizeDigit import recognizeDigit
 
 class digitExtractor:
 

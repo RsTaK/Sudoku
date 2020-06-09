@@ -1,4 +1,4 @@
-import helper
+from src import helper
 import cv2
 
 class AR:
@@ -39,7 +39,7 @@ class AR:
           self.display_Number(current_cell, data)
           self.j+=1
           self.check()
-
+    cv2.imwrite('./static/upload/solved_Image.jpg', thresh)
     helper.showImage("Solved Sudoku", thresh)
   
   def check(self):
@@ -77,4 +77,4 @@ class AR:
     
     if digit == 9:
       cv2.putText(current_cell, str(9), ((current_cell.shape[1]-current_cell.shape[0])//2, (current_cell.shape[0]+current_cell.shape[1])//2), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-    
+  
