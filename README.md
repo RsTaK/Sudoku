@@ -98,7 +98,7 @@ SUDOKU
 * numpy==1.18.1
 * opencv_python==4.1.2.30
 * Keras==2.3.1
-* Flask==1.1.2
+* Flask==1.1.1
 
 # How to Use?
 Clone the Repository and run app .py
