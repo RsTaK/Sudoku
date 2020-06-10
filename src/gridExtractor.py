@@ -35,7 +35,7 @@ class gridExtractor:
         break
     
     masked_Image = cv2.drawContours(self.image.copy(),[target],0,(0,255,0), 1)
-    helper.showImage('Masked Image', masked_Image)
+    #helper.showImage('Masked Image', masked_Image)
     cropped_Image = helper.four_point_transform(self.image, target)  
     cropped_Image = helper.convertSquare(cropped_Image)
     print('Grid Extracted...')

@@ -40,7 +40,7 @@ class AR:
           self.j+=1
           self.check()
     cv2.imwrite('./static/upload/solved_Image.jpg', thresh)
-    helper.showImage("Solved Sudoku", thresh)
+    #helper.showImage("Solved Sudoku", thresh)
   
   def check(self):
     if self.j >=9:

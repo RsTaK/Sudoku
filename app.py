@@ -17,12 +17,10 @@ def decodebyte64(data,filename):
 
 def build():
     img_path=r'input\default.jpg'
-    #model=r'model\Model.h5'
     croppedImage=gridExtractor(img_path).output
     recognized_sudoku = digitExtractor(croppedImage).output
     solved_sudoku = Sudoku_Solver(recognized_sudoku).output
     AR(croppedImage, solved_sudoku)
-    helper.destroyWindows()
 
 app = Flask(__name__, static_url_path='/static/')
 #app.config["UPLOAD_FOLDER"] = "/root_flask_app/static/upload/"
@@ -36,7 +34,7 @@ def predict():
     names = request.get_json() 
     encoded_path = names["filepath"]
     decodebyte64(encoded_path,"default.jpg")
-    #build()
+    build()
     croppedImage='/static/upload/cropped_Image.jpg'
     solvedImage='/static/upload/solved_Image.jpg'
 

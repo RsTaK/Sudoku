@@ -78,7 +78,7 @@
                 const upload=document.querySelector('.file-upload-button');
                 const sum=document.querySelector('.submitbutton');
                 const label=document.querySelector('.file-upload-label');
-                label.textContent="Please Wait While AI is Setting Up...";
+                label.textContent="Just a Minute Please While AI is Setting Up...";
                 upload.style.display="none";
                 sum.style.display="none";
                 previewImage.style.display="none";
@@ -93,6 +93,10 @@
                         success:function(response_data_json) {
                             const croppedImage=document.querySelector('.croppedImage');
                             const solvedImage=document.querySelector('.solvedImage');
+                            loader.style.display="none";
+                            croppedImage.style.display="block";
+                            solvedImage.style.display="block";
+                            label.textContent="Solution"
                             croppedImage.setAttribute("src",response_data_json.croppedImage);
                             solvedImage.setAttribute("src",response_data_json.solvedImage);
                             },

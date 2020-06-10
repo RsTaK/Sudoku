@@ -14,7 +14,7 @@ class digitExtractor:
     blur = cv2.bilateralFilter(gray, 5, 250, 250)
     thresh  = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,7)
     #gridless_img = self.removeGrid(thresh)
-    helper.showImage('Cropped Image',thresh)
+    #helper.showImage('Cropped Image',thresh)
     self._output = self.eachGrid(thresh)
 
   """
