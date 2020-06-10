@@ -95,9 +95,10 @@ SUDOKU
 <img src="assets\outputScreen.png" alt="drawing" width="100%" height="400"/>
 
 # Required Libraries
-* Flask
-* opencv-python
-* Keras
+* numpy==1.18.1
+* opencv_python==4.1.2.30
+* Keras==2.3.1
+* Flask==1.1.2
 
 # How to Use?
 Clone the Repository and run app .py
