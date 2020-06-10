@@ -23,7 +23,6 @@ def build():
     AR(croppedImage, solved_sudoku)
 
 app = Flask(__name__, static_url_path='/static/')
-#app.config["UPLOAD_FOLDER"] = "/root_flask_app/static/upload/"
 
 @app.route('/')
 def home():
